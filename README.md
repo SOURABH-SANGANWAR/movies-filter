@@ -1,3 +1,8 @@
+# Movies API.
+
+This is an API service using ElasticSearch and Mongodb in java spring-boot application.
+This is based on dataset: **https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset**.
+
 # Getting Started
 
 ## Reference Documentation
