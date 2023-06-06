@@ -1,5 +1,6 @@
 package data.movies.services;
 
+import data.movies.entities.Actor;
 import data.movies.entities.Movie;
 import data.movies.repositories.es.EsMovieRepository;
 import data.movies.repositories.mongo.MongoMovieRepository;
@@ -31,5 +32,10 @@ public class MovieService {
 
     public Optional<Movie> getMovieById(String id) {
         return mongoMovieRepository.findById(id);
+    }
+
+    public List<Movie> search(String searchText) {
+        return esMovieRepository.findByTitleContains(searchText);
+
     }
 }

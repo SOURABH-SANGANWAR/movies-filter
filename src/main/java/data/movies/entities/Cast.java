@@ -10,9 +10,9 @@ import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Document(indexName = "castesd")
+@Document(indexName = "#{@environment.getProperty('elastic_cast_index_name')}")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@org.springframework.data.mongodb.core.mapping.Document(collection = "castesd")
+@org.springframework.data.mongodb.core.mapping.Document(collection = "#{@environment.getProperty('mongodb_cast_cluster_name')}")
 @CompoundIndexes({
         @CompoundIndex(name = "unique_movie_actor", def = "{'movie_id' : 1, 'actor_id' : 1}", unique = true)
 })

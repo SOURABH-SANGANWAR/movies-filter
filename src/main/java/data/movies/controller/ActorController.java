@@ -46,4 +46,9 @@ public class ActorController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/es/{search_name}")
+    public ResponseEntity<List<Actor>> getActorBySearch(@PathVariable String search_name){
+        List<Actor> acts = actorService.search(search_name);
+        return new ResponseEntity<>(acts, HttpStatus.OK);
+    }
 }

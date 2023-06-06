@@ -1,5 +1,6 @@
 package data.movies.controller;
 
+import data.movies.entities.Actor;
 import data.movies.entities.Movie;
 import data.movies.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,12 @@ public class MovieController {
         Optional<Movie> movie = movieService.getMovieById(id);
         return movie.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/es/{search_name}")
+    public ResponseEntity<List<Movie>> getMoviesBySearch(@PathVariable String search_name){
+        List<Movie> mvis = movieService.search(search_name);
+        return new ResponseEntity<>(mvis, HttpStatus.OK);
     }
 
 }

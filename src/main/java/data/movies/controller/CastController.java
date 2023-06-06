@@ -2,6 +2,8 @@ package data.movies.controller;
 
 import data.movies.entities.Cast;
 import data.movies.services.CastService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,9 @@ import data.movies.search.ElasticsearchQuery;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Cast API Routes", description = "CRUD and filers for cast.")
 @RestController
 @RequestMapping("/cast")
 public class CastController {
@@ -55,6 +59,7 @@ public class CastController {
     @GetMapping("/actors/common")
     public ResponseEntity<List<List<Cast>>> getCommonActorsCast(@RequestBody List<String>actorIds) {
 
+        System.out.println(actorIds);
         List<List<Cast>> casts = null;
         try {
             casts = esQuery.getCommonActorCasts(actorIds);
@@ -68,7 +73,7 @@ public class CastController {
 
     @GetMapping("/movies/common")
     public ResponseEntity<List<List<Cast>>> getCommonMoviesCast(@RequestBody List<String>movieIds) {
-
+        System.out.println(movieIds);
         List<List<Cast>> casts = null;
         try {
             casts = esQuery.getCommonMovieCasts(movieIds);

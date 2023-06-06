@@ -6,6 +6,7 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 
+
 @SpringBootApplication
 @EnableMongoRepositories(basePackages = "data.movies.repositories.mongo")
 @EnableElasticsearchRepositories(basePackages = "data.movies.repositories.es")

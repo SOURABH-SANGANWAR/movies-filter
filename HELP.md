@@ -23,15 +23,23 @@ The following guides illustrate how to use some features concretely:
 Add application.properties in src/main/java/resources with following content.
 ### MongoDB configuration
 spring.data.mongodb.uri= <mongodb://{username}:{password}@localhost:{port}/{dbname}>
+mongodb_movie_cluster_name = (MONGO_DB MOVIES CLUSTER)\
+mongodb_actor_cluster_name = (MONGO_DB ACTORS CLUSTER)\
+mongodb_cast_cluster_name = (MONGO_DB CAST CLUSTER)
 ### Elasticsearch configuration
 spring.elasticsearch.cluster-nodes=(host)<br>
 spring.elasticsearch.cluster-name=(cluster-name)
+elastic_movie_index_name = (ELASTICSEARCH MOVIES INDEX)\
+elastic_actor_index_name = (ELASTICSEARCH ACTOR INDEX)\
+elastic_cast_index_name = (ELASTICSEARCH CAST INDEX)
 
 
 ## Current Configuration:
 ### MongoDb: 
 ### ElasticSearch : 
-docker.elastic.co/elasticsearch/elasticsearch:8.8.0
+##### docker.elastic.co/elasticsearch/elasticsearch:8.8.0
+##### Make movie_id and actor_id as keyword or enable fielddata as true. Edit code in ElasticsearchQuery accordingly.
+##### Currently, movie_id is key_word and actor_id is set as fielddata = true according to code.
 ## APIRoutes
 
 Following are List of APIRoutes defined and example body/ response:
@@ -139,6 +147,65 @@ Following are List of APIRoutes defined and example body/ response:
 
 
 
+
+<li>
+<details>
+<summary>/actors/es/{text} ['GET']:</summary>
+<ul>
+<li>Fetch data from elasticsearch. Get all actors with name contains text given.</li>
+<li>Example Request: /actors/es/Tom </li>
+<li>Example Response:<br>
+    [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "862",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gender": 2,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "Roger Tom",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"profile_path": "/mINHwB258stf5M4AZcpzXK1GRjW.jpg"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "31",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gender": 2,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "Tom Hanks",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"profile_path": "/pQFoyx7rp09CJTAb932F2g8Nlho.jpg"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    ]
+</li>
+<li>Status Codes: Success: 200, Error: 400</li>
+</ul>
+</details>
+</li>
+
+
+
+<li>
+<details>
+<summary>/movies/es/{text} ['GET']:</summary>
+<ul>
+<li>Fetch data from elasticsearch. Get all movies with title contains text given.</li>
+<li>Example Request: /moves/es/Toy </li>
+<li>Example Response:<br>
+    [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "862",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gender": 2,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "Roger Tom",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"profile_path": "/mINHwB258stf5M4AZcpzXK1GRjW.jpg"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "31",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gender": 2,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "Tom Hanks",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"profile_path": "/pQFoyx7rp09CJTAb932F2g8Nlho.jpg"<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    ]
+</li>
+<li>Status Codes: Success: 200, Error: 400</li>
+</ul>
+</details>
+</li>
+
+
+
 <li>
 <details>
 <summary> /cast/actors/common   ['GET']:</summary>
@@ -183,6 +250,7 @@ Following are List of APIRoutes defined and example body/ response:
 </ul>
 </details>
 </li>
+
 
 
 

@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-@Document(indexName = "movies_index_test")
-@org.springframework.data.mongodb.core.mapping.Document(collection = "movies_mongo_final_test")
+@Document(indexName = "#{@environment.getProperty('elastic_movie_index_name')}")
+@org.springframework.data.mongodb.core.mapping.Document(collection = "#{@environment.getProperty('mongodb_movie_cluster_name')}")
 public class Movie {
     @Id
     private String id;

@@ -7,8 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-@Document(indexName = "actors")
-@org.springframework.data.mongodb.core.mapping.Document(collection = "actors")
+//@Document(indexName = "actors_final")
+@Document(indexName = "#{@environment.getProperty('elastic_actor_index_name')}")
+@org.springframework.data.mongodb.core.mapping.Document(collection = "#{@environment.getProperty('mongodb_actor_cluster_name')}")
 public class Actor {
     @Id
     private String id;

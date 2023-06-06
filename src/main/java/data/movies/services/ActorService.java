@@ -5,6 +5,7 @@ import data.movies.entities.Movie;
 import data.movies.repositories.es.EsActorRepository;
 import data.movies.repositories.mongo.MongoActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +39,12 @@ public class ActorService {
     }
 
     public void saveAllActors(List<Actor> actors){
-        esActorRepository.saveAll(actors);
         mongoActorRepository.saveAll(actors);
+        esActorRepository.saveAll(actors);
+    }
+
+    public List<Actor> search(String searchText) {
+        return esActorRepository.findByNameContains(searchText);
+
     }
 }
